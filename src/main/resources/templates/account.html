@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberSec project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <div>Hello <span th:text="${account.getUsername()}">username</span></div>
+    <div scope="col">Edit your information:</div>
+    <form th:action="@{'/account/' + ${account.getId()} + '/edit'}" method="post">
+        <div class="form-group">
+            <label for="newUsername">Username</label>
+            <input type="text" class="form-control" id="newUsername" name="newUsername" placeholder="username" th:value="${account.getUsername()}">
+        </div>
+        <div class="form-group">
+            <label for="newCreditcard">Credit card</label>
+            <input type="text" class="form-control" id="newCreditcard" name="newCreditcard" placeholder="credit card" th:value="${account.getCreditcard()}">
+        </div>
+        <div class="form-group">
+            <label for="newPassword">New Password (leave empty to not change)</label>
+            <input class="form-control" id="newPassword" type="password" name="newPassword" placeholder="new password">
+        </div>
+        <div class="form-group">
+            <label for="password">Need current password to edit information</label>
+            <input class="form-control" id="password" type="password" name="password" placeholder="current password">
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+    </form>
+    <div>
+        <a th:href="@{'/'}">Back</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberSec project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <div>Hello <span th:text="${userAccount.getUsername()}">username</span> - <a th:href="@{/logout}">Logout</a></div>
+    <div><a th:href="@{'/account/' + ${userAccount.getId()}}">Show Profile</a></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">All registered users:</th>
+            <th th:if="${userAccount.getUsername() == 'admin'}">Id</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="account : ${accounts}">
+            <td scope="row" class="col-sm-6"><span th:utext="${account.getUsername()}">Username</span></td>
+            <td th:if="${userAccount.getUsername() == 'admin'}" class="col-sm-6 align-left" th:text="${account.getId()}">id</td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:if="${userAccount.getUsername() == 'admin'}" th:action="@{/remove}" method="post">
+        <fieldset>
+            <legend>Delete account</legend>
+            <label for="id">Id</label>
+            <input type="text" id="id" name="id"/>
+            <div class="form-actions">
+                <button type="submit" class="btn">Delete</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
